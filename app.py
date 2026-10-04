@@ -7,7 +7,7 @@ import numpy as np
 model = joblib.load("model.joblib")
 scaler = joblib.load("scaler.joblib")
 
-st.title("Breast Cancer Diagnosis Predictor..")
+st.title("Breast Cancer Diagnosis Predictor.")
 st.write("Enter tumor measurements to predict malignant vs benign.")
 
 # Collect 12 key features (same order as training)
