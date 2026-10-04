@@ -1,3 +1,4 @@
+%%writefile app.py
 import streamlit as st
 import joblib
 import numpy as np
@@ -6,7 +7,7 @@ import numpy as np
 model = joblib.load("model.joblib")
 scaler = joblib.load("scaler.joblib")
 
-st.title("Breast Cancer Diagnosis Predictor")
+st.title("This app uses a RandomForest model trained on the Breast Cancer dataset to predict whether a tumor is malignant or benign based on 12 key features.")
 st.write("Enter tumor measurements to predict malignant vs benign.")
 
 # Collect 12 key features (same order as training)
@@ -33,14 +34,17 @@ if st.button("Predict"):
     scaled_input = scaler.transform(input_data)
     result = model.predict(scaled_input)
 
-    # Debug line to check raw output
+# Debug line to check raw output (optional)
     st.write("Raw prediction value:", result[0])
     
     # Probability output
     proba = model.predict_proba(scaled_input)[0]
-    st.write(f"Malignant probability: {proba[0]*100:.2f}%")
-    st.write(f"Benign probability: {proba[1]*100:.2f}%")
+    st.write(f"Probability (Malignant): {proba[0]:.2f}")
+    st.write(f"Probability (Benign): {proba[1]:.2f}")
+    
 
     # Map prediction to diagnosis
     diagnosis = "Malignant" if result[0] == 0 else "Benign"
     st.success(f"Prediction: {diagnosis}")
+   
+
