@@ -35,6 +35,11 @@ if st.button("Predict"):
 
     # Debug line to check raw output
     st.write("Raw prediction value:", result[0])
+    
+    # Probability output
+    proba = model.predict_proba(scaled_input)[0]
+    st.write(f"Malignant probability: {proba[0]*100:.2f}%")
+    st.write(f"Benign probability: {proba[1]*100:.2f}%")
 
     # Map prediction to diagnosis
     diagnosis = "Malignant" if result[0] == 0 else "Benign"
